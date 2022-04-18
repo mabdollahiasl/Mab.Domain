@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Mab.Domain.Base.Model
+namespace Mab.Domain.Base.Entities
 {
     public class EntityBase<TKeyType>
     {

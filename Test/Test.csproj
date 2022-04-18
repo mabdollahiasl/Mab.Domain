@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mab.Blogs.Domain\Mab.Blogs.Domain.csproj" />
+    <ProjectReference Include="..\Mab.Domain.Base\Mab.Domain.Base.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -18,4 +18,7 @@
 	  <ProjectReference Include="..\Mab.Blogs.Domain\Mab.Blogs.Domain.csproj" />
 	  <ProjectReference Include="..\Mab.Domain.Base\Mab.Domain.Base.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Repository\" />
+	</ItemGroup>
 </Project>
