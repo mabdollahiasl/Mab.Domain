@@ -8,12 +8,15 @@ namespace Mab.Blogs.Domain.Entities.Groups
         public string Title { get; private set; }
         public string Description { get; private set; }
 
+        private Group()
+        {
+
+        }
         public Group(string title, string description)
         {
            Update(title, description);
         }
-
-     
+    
 
         public void Update(string title, string description)
         {

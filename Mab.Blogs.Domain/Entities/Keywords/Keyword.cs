@@ -5,9 +5,11 @@ namespace Mab.Blogs.Domain.Entities.Keywords
 {
     public class Keyword : EntityBase<int>, IAggregateRoot
     {
-      
-
         public string Title { get; private set; }
+
+        private Keyword()
+        {
+        }
 
         public Keyword(string title)
         {

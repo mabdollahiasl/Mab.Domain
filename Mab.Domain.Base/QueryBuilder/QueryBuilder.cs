@@ -6,6 +6,11 @@ using System.Text;
 
 namespace Mab.Domain.Base.QueryBuilder
 {
+    /// <summary>
+    /// A generic query builder for entity type based on specification design pattern, for making query generate a child class and inherits from this class and
+    /// then create your query in the constructor like Query.OrderBy ...
+    /// </summary>
+    /// <typeparam name="TEntity">the entity type</typeparam>
     public class QueryBuilder<TEntity> where TEntity : class
     {
         protected QueryBuilder()

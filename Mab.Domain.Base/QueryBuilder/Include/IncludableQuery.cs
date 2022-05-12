@@ -17,7 +17,9 @@ namespace Mab.Domain.Base.QueryBuilder
             {
                 throw new NotImplementedException("IncludeApplier not injected!");
             }
-            return (IQueryable<TEntity>)StartupExtenssions.IncludeApplier.Apply(entities);
-        }
+            var applier = StartupExtenssions.IncludeApplier;
+            applier.PropertyPath = Path;
+            return (IQueryable<TEntity>)applier.Apply(entities);
+        } 
     }
 }

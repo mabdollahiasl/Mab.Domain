@@ -2,6 +2,7 @@
 using Mab.Blogs.Domain.Entities.Keywords;
 using Mab.Domain.Base.Entities;
 using Mab.Domain.Base.Interfaces;
+using Mab.Domain.Base.Validation;
 
 namespace Mab.Blogs.Domain.Entities.Datafiles
 {
@@ -9,18 +10,22 @@ namespace Mab.Blogs.Domain.Entities.Datafiles
     {
         private IReadOnlyCollection<Group> _groups;
         private IReadOnlyCollection<Keyword> _keyWords;
-
-       
-
         public IReadOnlyCollection<Keyword> Keywords => _keyWords;
         public IReadOnlyCollection<Group> Groups => _groups;
         public string Name { get; private set; }
+        public string Title { get; private set; }
+
         public string Type { get; private set; }
         public int Size { get; private set; }
         public string Hash { get; private set; }
         public Guid CreatorId { get; set; }
 
-        public DataFile(string name,
+        private DataFile()
+        {
+
+        }
+
+        public DataFile(string title, string name,
                         string type,
                         int size,
                         string hash,
@@ -28,19 +33,32 @@ namespace Mab.Blogs.Domain.Entities.Datafiles
         {
             _keyWords = new List<Keyword>();
             _groups = new List<Group>();
-            Update(name, type, size, hash, creatorId);
+            Create(title, name, type, size, hash, creatorId);
         }
-        public void Update(string name,
-                        string type,
-                        int size,
-                        string hash,
-                        Guid creatorId)
+        private void Create(string title,
+                            string name,
+                            string type,
+                            int size,
+                            string hash,
+                            Guid creatorID)
         {
+            Validation.Throw.OnNullOrEmpty(name, nameof(name));
+            Validation.Throw.OnNullOrEmpty(type, nameof(type));
+            Validation.Throw.OnNullOrEmpty(hash, nameof(hash));
+            Validation.Throw.OnNullOrEmpty(title, nameof(title));
+            Validation.Throw.OnZeroAndSmaller(size, nameof(size));
+
+            Title = title;
+            CreatorId = creatorID;
             Name = name;
             Type = type;
             Size = size;
             Hash = hash;
-            CreatorId = creatorId;
+        }
+        public void Update(string title)
+        {
+            Validation.Throw.OnNullOrEmpty(title, nameof(title));
+            Title = title;
         }
     }
 }

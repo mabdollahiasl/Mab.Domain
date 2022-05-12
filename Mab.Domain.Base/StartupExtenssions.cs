@@ -8,9 +8,9 @@ namespace Mab.Domain.Base
 {
     public static class StartupExtenssions
     {
-        public static IQueryApplier IncludeApplier { get; private set; }
+        public static IIncludeQueryApplier IncludeApplier { get; private set; }
 
-        public static void AddIncludeQueryBuilder(this IServiceCollection service, IQueryApplier queryApplier)
+        public static void AddIncludeQueryBuilder(this IServiceCollection service, IIncludeQueryApplier queryApplier)
         {
             IncludeApplier = queryApplier;
         }
