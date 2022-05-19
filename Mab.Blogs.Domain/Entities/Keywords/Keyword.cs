@@ -1,5 +1,6 @@
 ﻿using Mab.Domain.Base.Entities;
 using Mab.Domain.Base.Interfaces;
+using Mab.Domain.Base.Validation;
 
 namespace Mab.Blogs.Domain.Entities.Keywords
 {
@@ -10,12 +11,15 @@ namespace Mab.Blogs.Domain.Entities.Keywords
         private Keyword()
         {
         }
-
         public Keyword(string title)
         {
-            Update(title);
+            Create(title);
         }
-
+        private void Create(string title)
+        {
+            Validation.Throw.OnNullOrEmpty(title, nameof(title));
+            Title = title;
+        }
         public void Update(string title)
         {
             Title = title;

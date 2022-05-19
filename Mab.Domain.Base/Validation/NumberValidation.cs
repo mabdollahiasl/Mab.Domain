@@ -29,5 +29,6 @@ namespace Mab.Domain.Base.Validation
                 throw new NumberZeroException(parameterName);
             }
         }
+        
     }
 }

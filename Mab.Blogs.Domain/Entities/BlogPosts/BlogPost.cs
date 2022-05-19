@@ -16,7 +16,7 @@ namespace Mab.Blogs.Domain.Entities.BlogPosts
 
         public string Title { get; private set; }
         public string Description { get; private set; }
-        public string Content { get; private set; }
+        public string Content { get; private set; } 
         public string Name { get; private set; }
         public Guid WriterId { get; set; }
         public Guid? LastEditorId { get; set; }
@@ -36,7 +36,6 @@ namespace Mab.Blogs.Domain.Entities.BlogPosts
         {
             _groups = new HashSet<Group>();
             _keyWords = new HashSet<Keyword>();
-            RegDate = DateTimeOffset.Now;
             Create(title, description, content, name,writerId);
         }
 
@@ -49,7 +48,7 @@ namespace Mab.Blogs.Domain.Entities.BlogPosts
             Validation.Throw.OnNullOrEmpty(title, nameof(title));
             Validation.Throw.OnNullOrEmpty(content, nameof(content));
             Validation.Throw.OnNullOrEmpty(name, nameof(name));
-
+            RegDate = DateTimeOffset.Now;
             Title = title;
             Description = description;
             Content = content;
