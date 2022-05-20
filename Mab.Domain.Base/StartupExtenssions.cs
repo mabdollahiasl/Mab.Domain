@@ -8,11 +8,15 @@ namespace Mab.Domain.Base
 {
     public static class StartupExtenssions
     {
-        public static IIncludeQueryApplier IncludeApplier { get; private set; }
+        internal static Type IncludeApplierType { get; private set; }
 
-        public static void AddIncludeQueryBuilder(this IServiceCollection service, IIncludeQueryApplier queryApplier)
+        public static void AddIncludeQueryBuilder(this IServiceCollection service, Type queryApplierType)
         {
-            IncludeApplier = queryApplier;
+            if(queryApplierType !=typeof(IIncludeQueryApplier))
+            {
+                throw new Exception("queryApplierType type must be IIncludeQueryApplier");
+            }
+            IncludeApplierType = queryApplierType;
         }
     }
 }

@@ -4,9 +4,13 @@ using System.Text;
 
 namespace Mab.Domain.Base.Entities
 {
-    public class EntityBase<TKeyType>
+    public class EntityBase<TKeyType>:EntityBase
     {
         public TKeyType Id { get; set; }
+    }
+    public abstract class EntityBase
+    {
+
     }
    
 }

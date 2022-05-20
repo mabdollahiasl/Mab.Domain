@@ -13,13 +13,14 @@ namespace Mab.Domain.Base.QueryBuilder
 
         public IQueryable<TEntity> Apply(IQueryable<TEntity> entities)
         {
-            if (StartupExtenssions.IncludeApplier == null)
+            if (StartupExtenssions.IncludeApplierType == null)
             {
                 throw new NotImplementedException("IncludeApplier not injected!");
             }
-            var applier = StartupExtenssions.IncludeApplier;
+            var applierType = StartupExtenssions.IncludeApplierType;
+            IIncludeQueryApplier applier = (IIncludeQueryApplier)Activator.CreateInstance(applierType);
             applier.PropertyPath = Path;
-            return (IQueryable<TEntity>)applier.Apply(entities);
+            return (IQueryable<TEntity>)applier.Apply<TEntity>(entities);
         } 
     }
 }
