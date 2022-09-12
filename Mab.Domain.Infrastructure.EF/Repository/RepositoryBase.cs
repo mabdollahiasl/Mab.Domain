@@ -12,73 +12,81 @@ using System.Threading.Tasks;
 
 namespace Mab.Domain.Infrastructure.EF.Repository
 {
-    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : EntityBase, IAggregateRoot
+    public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : EntityBase, IAggregateRoot
     {
         protected DbContextBase DbContext { get; }
         protected DbSet<TEntity> DbSet { get; }
         public RepositoryBase(DbContextBase dbContext)
         {
+            
             DbContext = dbContext;
             DbSet = dbContext.Set<TEntity>();
         }
         public IUnitOfWork UnitOfWork => DbContext;
 
-        public async Task Add(TEntity entity, CancellationToken cancellationToken = default)
+        public virtual async Task Add(TEntity entity, CancellationToken cancellationToken = default)
         {
             await DbSet.AddAsync(entity, cancellationToken);
         }
-
-        public async Task<int> Count(IQuery<TEntity> query, CancellationToken cancellationToken = default)
+        public virtual async Task AddRange(IEnumerable<TEntity> entity, CancellationToken cancellationToken = default)
+        {
+            await DbSet.AddRangeAsync(entity, cancellationToken);
+        }
+        public virtual async Task<int> Count(IQueryBuilder<TEntity> query, CancellationToken cancellationToken = default)
         {
             var all = query.Apply(DbSet);
             return await all.CountAsync(cancellationToken);
         }
 
-        public async Task<int> Count(CancellationToken cancellationToken = default)
+        public virtual async Task<int> Count(CancellationToken cancellationToken = default)
         {
             return await DbSet.CountAsync(cancellationToken);
         }
 
-        public async Task Delete<TKeyType>(TKeyType id, CancellationToken cancellationToken = default)
+        public virtual async Task Delete<TKeyType>(TKeyType id, CancellationToken cancellationToken = default)
         {
-            var entityToDelete = await DbSet.FindAsync(id,cancellationToken);
+            var entityToDelete = await DbSet.FindAsync(new object[] { id }, cancellationToken);
             if (entityToDelete != null)
             {
                 DbSet.Remove(entityToDelete);
             }
         }
 
-        public async Task<TEntity> Get<TKeyType>(TKeyType id, CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity> Get<TKeyType>(TKeyType id, CancellationToken cancellationToken = default)
         {
-            var entity = await DbSet.FindAsync(id, cancellationToken);
+            var entity = await DbSet.FindAsync(new object[] { id },cancellationToken);
             return entity;
         }
-        public async Task<TEntity> Get(IQuery<TEntity> query, CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity> GetByQuery(IQueryBuilder<TEntity> query, CancellationToken cancellationToken = default) 
         {
             var all = query.Apply(DbSet);
             return await all.FirstOrDefaultAsync(cancellationToken);
         }
 
-        public async Task<List<TEntity>> GetAll(CancellationToken cancellationToken = default)
+        public virtual async Task<List<TEntity>> GetAll(CancellationToken cancellationToken = default)
         {
             return await DbSet.ToListAsync(cancellationToken);
         }
-        public async Task<List<TEntity>> GetAll(IQuery<TEntity> query, CancellationToken cancellationToken = default)
+        public virtual async Task<List<TEntity>> GetAllByQuery(IQueryBuilder<TEntity> query, CancellationToken cancellationToken = default)
         {
             var all = query.Apply(DbSet);
             return await all.ToListAsync(cancellationToken);
         }
 
-        public async Task<List<TEntity>> GetAll(IQuery<TEntity> query, int skip, int take, CancellationToken cancellationToken = default)
+        public virtual async Task<List<TEntity>> GetAllByQuery(IQueryBuilder<TEntity> query, int skip, int take, CancellationToken cancellationToken = default)
         {
             var all = query.Apply(DbSet);
             return await all.Skip(skip).Take(take).ToListAsync(cancellationToken);
         }
 
-        public Task Update(TEntity entity, CancellationToken cancellationToken = default)
+        public virtual Task Update(TEntity entity, CancellationToken cancellationToken = default)
         {
             DbSet.Update(entity);
             return Task.CompletedTask;
         }
+
+       
+
+       
     }
 }

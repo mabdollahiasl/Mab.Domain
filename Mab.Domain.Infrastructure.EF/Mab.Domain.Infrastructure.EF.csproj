@@ -1,20 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>Morteza Abdollahiasl</Authors>
+		<Description>Mab.Domain.Infrastructure.EF is a base library for DDD projects.</Description>
+		<PackageId>Mab.Domain.Infrastructure.EF</PackageId>
+		<Version>1.1.6</Version>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="Mab.Domain.Base" Version="1.1.6" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
+
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.3">
+
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\Mab.Domain.Base\Mab.Domain.Base.csproj" />
-	</ItemGroup>
+
 </Project>

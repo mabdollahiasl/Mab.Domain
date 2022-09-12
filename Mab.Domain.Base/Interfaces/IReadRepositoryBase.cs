@@ -10,12 +10,12 @@ namespace Mab.Domain.Base.Interfaces
 {
     public interface IReadRepositoryBase<TEntity> where TEntity:EntityBase, IAggregateRoot
     {
-        Task<List<TEntity>> GetAll(CancellationToken cancellationToken = default(CancellationToken));
         Task<TEntity> Get<TKeyType>(TKeyType id, CancellationToken cancellationToken = default(CancellationToken));
-        Task<TEntity> Get(IQuery<TEntity> query, CancellationToken cancellationToken = default(CancellationToken));
-        Task<List<TEntity>> GetAll(IQuery<TEntity> query, CancellationToken cancellationToken = default(CancellationToken));
-        Task<List<TEntity>> GetAll(IQuery<TEntity> query, int skip, int take, CancellationToken cancellationToken = default(CancellationToken));
-        Task<int> Count(IQuery<TEntity> query, CancellationToken cancellationToken = default(CancellationToken));
+        Task<TEntity> GetByQuery(IQueryBuilder<TEntity> query, CancellationToken cancellationToken = default(CancellationToken));
+        Task<List<TEntity>> GetAll(CancellationToken cancellationToken = default(CancellationToken));
+        Task<List<TEntity>> GetAllByQuery(IQueryBuilder<TEntity> query, CancellationToken cancellationToken = default(CancellationToken));
+        Task<List<TEntity>> GetAllByQuery(IQueryBuilder<TEntity> query, int skip, int take, CancellationToken cancellationToken = default(CancellationToken));
+        Task<int> Count(IQueryBuilder<TEntity> query, CancellationToken cancellationToken = default(CancellationToken));
         Task<int> Count(CancellationToken cancellationToken = default(CancellationToken));
 
     }

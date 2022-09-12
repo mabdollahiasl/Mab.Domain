@@ -10,13 +10,10 @@ namespace Mab.Domain.Base
     {
         internal static Type IncludeApplierType { get; private set; }
 
-        public static void AddIncludeQueryBuilder(this IServiceCollection service, Type queryApplierType)
+        public static void AddIncludeQueryBuilder<TQueryApplier>(this IServiceCollection service) where TQueryApplier : IIncludeQueryApplier
         {
-            if(queryApplierType !=typeof(IIncludeQueryApplier))
-            {
-                throw new Exception("queryApplierType type must be IIncludeQueryApplier");
-            }
-            IncludeApplierType = queryApplierType;
+
+            IncludeApplierType = typeof(TQueryApplier);
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Mab.Domain.Base.Interfaces
     public interface IWriteRepositoryBase<TEntity> where TEntity : EntityBase, IAggregateRoot
     {
         Task Add(TEntity entity, CancellationToken cancellationToken = default);
+        Task AddRange(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
+
         Task Update(TEntity entity, CancellationToken cancellationToken = default);
         Task Delete<TKeyType>(TKeyType id, CancellationToken cancellationToken = default);
         IUnitOfWork UnitOfWork { get; }

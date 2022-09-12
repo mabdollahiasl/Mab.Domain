@@ -11,7 +11,7 @@ namespace Mab.Domain.Base.QueryBuilder
     /// then create your query in the constructor like Query.OrderBy ...
     /// </summary>
     /// <typeparam name="TEntity">the entity type</typeparam>
-    public class QueryBuilder<TEntity> where TEntity : class
+    public class QueryBuilder<TEntity>: IQueryBuilder<TEntity> where TEntity : class
     {
         protected QueryBuilder()
         {
@@ -31,6 +31,10 @@ namespace Mab.Domain.Base.QueryBuilder
             }
             return result;
         }
+    }
+    public interface IQueryBuilder<TEntity> where TEntity : class
+    {
+        IQueryable<TEntity> Apply(IQueryable<TEntity> entities);
     }
     public interface IQuery<TEntity>:IQuery where TEntity : class
     {

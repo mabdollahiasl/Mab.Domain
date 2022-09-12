@@ -1,19 +1,19 @@
 ﻿
 
-using Mab.Blogs.Domain.Entities.BlogPosts;
+using Mab.Domain.Base.Interfaces;
 using Mab.Domain.Base.QueryBuilder;
+using Mab.Domain.Infrastructure.EF;
+using Mab.Domain.Infrastructure.EF.Repository;
 using Test;
 
 PersonAgeBiggerThanTen query = new PersonAgeBiggerThanTen();
 
-List<Person> people = new();
-people.Add(new Person("Sepehr", 5));
-people.Add(new Person("Nima", 8));
-people.Add(new Person("Ava", 12));
-people.Add(new Person("Ida", 25));
 
 
-var res = query.Apply(people.AsQueryable<Person>());
+
+EfRepo Ef=new EfRepo(null);
+
+var res=Ef.Get(new PersonAgeBiggerThanTen());
 
 
 
@@ -24,5 +24,11 @@ public class PersonAgeBiggerThanTen : QueryBuilder<Person>
     public PersonAgeBiggerThanTen()
     {
         Query.Where(a => a.Age > 10).OrderByDescending(a => a.Age);
+    }
+}
+public class EfRepo : RepositoryBase<Person>
+{
+    public EfRepo(DbContextBase dbContext) : base(dbContext)
+    {
     }
 }

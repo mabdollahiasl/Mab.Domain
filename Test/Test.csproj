@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mab.Domain.Base\Mab.Domain.Base.csproj" />
+    <ProjectReference Include="..\Mab.Domain.Infrastructure.EF\Mab.Domain.Infrastructure.EF.csproj" />
   </ItemGroup>
 
 </Project>

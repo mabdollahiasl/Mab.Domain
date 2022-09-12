@@ -11,7 +11,8 @@ namespace Mab.Domain.Infrastructure.EF
     {
         public static void AddInfrastructureBase(this IServiceCollection service)
         {
-            service.AddIncludeQueryBuilder(typeof(IncludeQueryApplier));
+            service.AddIncludeQueryBuilder<IncludeQueryApplier>();
+          
         }
     }
 }

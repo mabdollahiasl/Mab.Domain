@@ -10,6 +10,14 @@ namespace Mab.Domain.Infrastructure.EF
 {
     public class DbContextBase : DbContext, IUnitOfWork
     {
+        public DbContextBase(DbContextOptions options):base(options)
+        {
+
+        }
+        public DbContextBase():base()
+        {
+
+        }
         public virtual async Task SaveChanges(CancellationToken cancellationToken = default)
         {
            await base.SaveChangesAsync(cancellationToken);
