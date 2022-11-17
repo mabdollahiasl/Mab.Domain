@@ -8,7 +8,7 @@
 		<Authors>Morteza Abdollahiasl</Authors>
 		<Description>Mab.Domain.Infrastructure.EF is a base library for DDD projects.</Description>
 		<PackageId>Mab.Domain.Infrastructure.EF</PackageId>
-		<Version>1.1.6</Version>
+		<Version>1.1.7</Version>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 	<ItemGroup>

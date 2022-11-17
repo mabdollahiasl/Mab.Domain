@@ -10,7 +10,7 @@
 		<PackageProjectUrl>https://github.com/mabdollahiasl/Mab.Domain</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageId>Mab.Domain.Base.Api</PackageId>
-		<Version>1.0.10</Version>
+		<Version>1.1.1</Version>
 		<Authors>Morteza Abdollahiasl</Authors>
 	</PropertyGroup>
 

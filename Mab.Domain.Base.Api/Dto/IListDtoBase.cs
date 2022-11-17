@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Mab.Domain.Base.Api.Dto
 {
-    internal interface IListDtoBase<out T> : IEnumerable<T>, IDtoBase where T : IDtoBase
+    public interface IListDtoBase<out T> : IEnumerable<T>, IDtoBase where T : IDtoBase
     {
 
     }
-    internal class DtoList<T> : List<T>, IListDtoBase<T> where T : IDtoBase
+    public class DtoList<T> : List<T>, IListDtoBase<T> where T : IDtoBase
     {
         public DtoList()
         {
