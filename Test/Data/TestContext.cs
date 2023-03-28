@@ -25,7 +25,6 @@ namespace Test.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"***REMOVED***");
             base.OnConfiguring(optionsBuilder);
         }
     }
