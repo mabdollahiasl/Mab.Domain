@@ -16,6 +16,7 @@ namespace Mab.Domain.Base.QueryBuilder
         protected QueryBuilder()
         {
             Query = new Query<TEntity>();
+            
         }
 
         protected IQuery<TEntity> Query { get; }

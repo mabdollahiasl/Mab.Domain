@@ -15,18 +15,20 @@ namespace Mab.Domain.Base.QueryBuilder
                 throw new MemberAccessException();
             }
             var memberToInclude = propertyPath.Body as MemberExpression;
+            string path = GetPropertyPath(memberToInclude);
+
             var res = new IncludableQuery<TEntity, TProperty>
             {
-                Path = memberToInclude.Member.Name
+                Path = path
             };
-            query.Next=res;
+            query.Next = res;
             return res;
         }
 
         public static IIncludableQuery<TEntity, TProperty> ThenInclude<TEntity, TPreviousProperty, TProperty>
             (
             this IIncludableQuery<TEntity, IEnumerable<TPreviousProperty>> query,
-            Expression<Func<TPreviousProperty, TProperty>> propertyPath) where TEntity:class
+            Expression<Func<TPreviousProperty, TProperty>> propertyPath) where TEntity : class
         {
             if (propertyPath.Body.NodeType != ExpressionType.MemberAccess)
             {
@@ -34,12 +36,25 @@ namespace Mab.Domain.Base.QueryBuilder
             }
 
             var memberToInclude = propertyPath.Body as MemberExpression;
+            string path = GetPropertyPath(memberToInclude);
             var res = new IncludableQuery<TEntity, TProperty>
             {
-                Path = $"{query.Path}.{memberToInclude.Member.Name}"
+                Path = $"{query.Path}.{path}"
             };
             query.Next = res;
             return res;
+        }
+        private static string GetPropertyPath(MemberExpression body)
+        {
+            List<string> path = new List<string>();
+            while (body != null)
+            {
+                string propertyName = body.Member.Name;
+                path.Add(propertyName);
+                body = body.Expression as MemberExpression;
+            }
+            path.Reverse();
+            return string.Join(".", path);
         }
     }
 }

@@ -1,34 +1,62 @@
 ﻿
 
-using Mab.Domain.Base.Interfaces;
-using Mab.Domain.Base.QueryBuilder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Mab.Domain.Infrastructure.EF;
-using Mab.Domain.Infrastructure.EF.Repository;
 using Test;
+using Test.Data;
+using Microsoft.EntityFrameworkCore;
+using Mab.Domain.Base.Interfaces;
+using Test.CustomQuery;
+using Mab.Domain.Base;
 
-PersonAgeBiggerThanTen query = new PersonAgeBiggerThanTen();
-
-
-
-
-EfRepo Ef=new EfRepo(null);
-
-var res=Ef.Get(new PersonAgeBiggerThanTen());
-
-
-
-Console.WriteLine("Hello, World!");
-
-public class PersonAgeBiggerThanTen : QueryBuilder<Person>
-{
-    public PersonAgeBiggerThanTen()
+using IHost host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices(services =>
     {
-        Query.Where(a => a.Age > 10).OrderByDescending(a => a.Age);
-    }
+        services.AddCustomQueryBuilder(typeof(Person));
+        services.AddInfrastructureBase();
+        services.AddDbContext<TestContext>((opt) => opt.UseInMemoryDatabase("TestData"));
+        services.AddScoped(typeof(IReadRepositoryBase<>), typeof(EFRepository<>));
+        services.AddScoped(typeof(IWriteRepositoryBase<>), typeof(EFRepository<>));
+        services.AddScoped(typeof(IRepositoryBase<>), typeof(EFRepository<>));
+    })
+    .Build();
+using IServiceScope serviceScope = host.Services.CreateScope();
+IServiceProvider provider = serviceScope.ServiceProvider;
+
+IRepositoryBase<Person> _repository = provider.GetService<IRepositoryBase<Person>>();
+if (_repository == null)
+{
+    return;
 }
-public class EfRepo : RepositoryBase<Person>
+
+await _repository.Add(new Person { Name = "N1", Age = 1, Id = 4 });
+await _repository.Add(new Person { Name = "N2", Age = 1, Id = 2 });
+await _repository.Add(new Person { Name = "N3", Age = 2, Id = 3 });
+await _repository.Add(new Person { Name = "N4", Age = 2, Id = 1 });
+
+await _repository.UnitOfWork.SaveChanges();
+
+
+//var person= await _repository.GetAllByQuery(new PersonGroupByAgeQuery());
+
+var persons = await _repository.GetAllByQuery(new SortQuery("Id"));
+
+Console.WriteLine();
+
+
+await host.RunAsync();
+
+
+
+public class TestRepository
 {
-    public EfRepo(DbContextBase dbContext) : base(dbContext)
+    IReadRepositoryBase<Person> _readRepository;
+
+    public TestRepository(IReadRepositoryBase<Person> readRepository)
     {
+        _readRepository = readRepository;
     }
+
+
 }

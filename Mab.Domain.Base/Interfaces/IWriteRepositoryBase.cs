@@ -14,7 +14,10 @@ namespace Mab.Domain.Base.Interfaces
 
         Task Update(TEntity entity, CancellationToken cancellationToken = default);
         Task Delete<TKeyType>(TKeyType id, CancellationToken cancellationToken = default);
+        Task DeleteRange<TKeyType>(IEnumerable<TKeyType> id, CancellationToken cancellationToken = default);
+        Task DeleteRange(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
+
         IUnitOfWork UnitOfWork { get; }
-       
+
     }
 }

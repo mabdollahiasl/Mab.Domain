@@ -15,7 +15,7 @@ namespace Mab.Domain.Infrastructure.EF
         public IQueryable Apply<TEntity>(IQueryable query) where TEntity : class
         {
             IQueryable<TEntity> curQuery = (IQueryable<TEntity>)query;
-
+          
             return curQuery.Include(PropertyPath);
         }
         

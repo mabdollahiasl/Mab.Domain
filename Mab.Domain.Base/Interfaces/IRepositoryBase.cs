@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Mab.Domain.Base.Interfaces
 {
-    public interface IRepositoryBase<TEntity>:IReadRepositoryBase<TEntity>, IWriteRepositoryBase<TEntity> where TEntity : EntityBase,IAggregateRoot
+    public interface IRepositoryBase<TEntity> : IReadRepositoryBase<TEntity>, IWriteRepositoryBase<TEntity> where TEntity : EntityBase, IAggregateRoot
     {
 
     }

@@ -11,6 +11,20 @@ namespace Mab.Domain.Base.QueryBuilder
             KeySelector = keySelector;
             Type = type;
         }
+        public OrderByQuery(string propertyName, OrderByType type)
+        {
+            KeySelector = ToLambda(propertyName);
+            Type = type;
+        }
+
+        private Expression<Func<TEntity, TKey>> ToLambda(string propertyName)
+        {
+            var parameter = Expression.Parameter(typeof(TEntity));
+            var property = Expression.Property(parameter, propertyName);
+            var propAsObject = Expression.Convert(property, typeof(TKey));
+
+            return Expression.Lambda<Func<TEntity, TKey>>(propAsObject, parameter);       
+        }
 
         public IQuery<TEntity> Next { get; set; }
         public Expression<Func<TEntity, TKey>> KeySelector { get; }
@@ -27,7 +41,17 @@ namespace Mab.Domain.Base.QueryBuilder
                 default:
                     throw new NotSupportedException();
             }
+            
         }
+
+        //private static Expression<Func<TEntity, TKey>> ToLambda<TEntity>(string propertyName) where TEntity : class 
+        //{
+        //    var parameter = Expression.Parameter(typeof(TEntity));
+        //    var property = Expression.Property(parameter, propertyName);
+        //    var propAsObject = Expression.Convert(property, typeof(TKey));
+
+        //    return Expression.Lambda<Func<TEntity, TKey>>(propAsObject, parameter);
+        //}
     }
     public enum OrderByType
     {
