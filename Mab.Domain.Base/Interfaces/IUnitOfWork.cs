@@ -9,5 +9,8 @@ namespace Mab.Domain.Base.Interfaces
     public interface IUnitOfWork
     {
         Task SaveChanges(CancellationToken cancellationToken = default(CancellationToken));
+        Task BeginWork();
+        Task CommitWork();
+        Task DeleteWork();
     }
 }

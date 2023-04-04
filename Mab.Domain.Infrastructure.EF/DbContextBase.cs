@@ -22,5 +22,23 @@ namespace Mab.Domain.Infrastructure.EF
         {
            await base.SaveChangesAsync(cancellationToken);
         }
+
+        public Task BeginWork()
+        {
+            this.Database.BeginTransaction(System.Data.IsolationLevel.Serializable);
+            return Task.CompletedTask;
+        }
+
+        public Task CommitWork()
+        {
+            this.Database.CommitTransaction();
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteWork()
+        {
+            this.Database.RollbackTransaction();
+            return Task.CompletedTask;
+        }
     }
 }
