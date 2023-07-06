@@ -8,11 +8,11 @@
 		<Authors>Morteza Abdollahiasl</Authors>
 		<Description>Mab.Domain.Infrastructure.EF is a base library for DDD projects.</Description>
 		<PackageId>Mab.Domain.Infrastructure.EF</PackageId>
-		<Version>1.1.23</Version>
+		<Version>1.1.28</Version>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Mab.Domain.Base" Version="1.1.23" />
+		<PackageReference Include="Mab.Domain.Base" Version="1.1.28" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
 

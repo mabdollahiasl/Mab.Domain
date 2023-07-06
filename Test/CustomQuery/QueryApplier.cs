@@ -13,6 +13,7 @@ namespace Test.CustomQuery
     {
         public IQueryable<PersonAgeWithCount> Apply(IQueryable<Person> entities, ICustomQuery<Person, PersonAgeWithCount> query)
         {
+            
             return entities.GroupBy(p => p.Age).Select(g => new PersonAgeWithCount(g.Key, g.Count()));
         }
     }

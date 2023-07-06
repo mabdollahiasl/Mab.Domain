@@ -22,7 +22,7 @@ namespace Mab.Domain.Infrastructure.EF.Repository
             DbSet = dbContext.Set<TEntity>();
         }
 
-    
+
         public virtual async Task<int> Count(IQueryBuilder<TEntity> query, CancellationToken cancellationToken = default)
         {
             var all = query.Apply(DbSet);
@@ -34,7 +34,7 @@ namespace Mab.Domain.Infrastructure.EF.Repository
             return await DbSet.CountAsync(cancellationToken);
         }
 
-     
+
 
         public virtual async Task<TEntity> Get<TKeyType>(TKeyType id, CancellationToken cancellationToken = default)
         {
@@ -79,6 +79,12 @@ namespace Mab.Domain.Infrastructure.EF.Repository
         {
             var all = query.Query(DbSet);
             return await all.FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task<int> Count<TResult>(ICustomQuery<TEntity, TResult> query, CancellationToken cancellationToken = default)
+        {
+            var all = query.Query(DbSet);
+            return await all.CountAsync(cancellationToken);
         }
     }
 }

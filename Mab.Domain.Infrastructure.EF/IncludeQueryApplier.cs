@@ -12,7 +12,7 @@ namespace Mab.Domain.Infrastructure.EF
         public string PropertyPath { get; set; } = string.Empty;
        
 
-        public IQueryable Apply<TEntity>(IQueryable query) where TEntity : class
+        public IQueryable<TEntity> Apply<TEntity>(IQueryable<TEntity> query) where TEntity : class
         {
             IQueryable<TEntity> curQuery = (IQueryable<TEntity>)query;
           

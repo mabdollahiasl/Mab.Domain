@@ -7,6 +7,6 @@ namespace Mab.Domain.Base.QueryBuilder
 {
     public interface IQueryApplier
     {
-        IQueryable Apply<TEntity>(IQueryable query) where TEntity:class;
+        IQueryable<TEntity> Apply<TEntity>(IQueryable<TEntity> query) where TEntity:class;
     }
 }

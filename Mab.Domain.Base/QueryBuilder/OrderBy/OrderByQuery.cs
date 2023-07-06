@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mab.Domain.Base.QueryBuilder.CustomQuery;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -19,11 +20,7 @@ namespace Mab.Domain.Base.QueryBuilder
 
         private Expression<Func<TEntity, TKey>> ToLambda(string propertyName)
         {
-            var parameter = Expression.Parameter(typeof(TEntity));
-            var property = Expression.Property(parameter, propertyName);
-            var propAsObject = Expression.Convert(property, typeof(TKey));
-
-            return Expression.Lambda<Func<TEntity, TKey>>(propAsObject, parameter);       
+            return QueryableOrderByExtensions.ToLambda<TEntity, TKey>(propertyName);
         }
 
         public IQuery<TEntity> Next { get; set; }

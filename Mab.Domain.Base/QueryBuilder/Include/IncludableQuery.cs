@@ -20,7 +20,7 @@ namespace Mab.Domain.Base.QueryBuilder
             var applierType = StartupExtenssions.IncludeApplierType;
             IIncludeQueryApplier applier = (IIncludeQueryApplier)Activator.CreateInstance(applierType);
             applier.PropertyPath = Path;
-            return (IQueryable<TEntity>)applier.Apply<TEntity>(entities);
+            return applier.Apply(entities);
         } 
     }
 }

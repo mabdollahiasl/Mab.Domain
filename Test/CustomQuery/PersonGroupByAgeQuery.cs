@@ -11,6 +11,7 @@ namespace Test.CustomQuery
     {
         public override IQueryable<PersonAgeWithCount> Query(IQueryable<Person> query)
         {
+            query.AsAsyncQueryable();
            return query.GroupBy(a => a.Age).
                         Select(a => new PersonAgeWithCount(a.Key, a.Count()));
         }

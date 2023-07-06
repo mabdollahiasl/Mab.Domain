@@ -37,10 +37,11 @@ await _repository.Add(new Person { Name = "N4", Age = 2, Id = 1 });
 
 await _repository.UnitOfWork.SaveChanges();
 
+IQueryable<Person> ss;
 
 //var person= await _repository.GetAllByQuery(new PersonGroupByAgeQuery());
 
-var persons = await _repository.GetAllByQuery(new SortQuery("Id"));
+var persons = await _repository.GetAllByQuery(new PersonGroupByAgeQuery());
 
 Console.WriteLine();
 

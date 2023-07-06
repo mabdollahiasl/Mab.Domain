@@ -23,6 +23,7 @@ namespace Mab.Domain.Base.Interfaces
         Task<TResult> GetByQuery<TResult>(ICustomQuery<TEntity, TResult> query, CancellationToken cancellationToken = default(CancellationToken));
 
 
+        Task<int> Count<TResult>(ICustomQuery<TEntity, TResult> query, CancellationToken cancellationToken = default(CancellationToken));
         Task<int> Count(IQueryBuilder<TEntity> query, CancellationToken cancellationToken = default(CancellationToken));
         Task<int> Count(CancellationToken cancellationToken = default(CancellationToken));
 

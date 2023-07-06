@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mab.Domain.Base.QueryBuilder.CustomQuery;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
@@ -15,7 +16,7 @@ namespace Mab.Domain.Base.QueryBuilder
                 throw new MemberAccessException();
             }
             var memberToInclude = propertyPath.Body as MemberExpression;
-            string path = GetPropertyPath(memberToInclude);
+            string path = QueryableIncludeExtenssions.GetPropertyPath(memberToInclude);
 
             var res = new IncludableQuery<TEntity, TProperty>
             {
@@ -36,7 +37,7 @@ namespace Mab.Domain.Base.QueryBuilder
             }
 
             var memberToInclude = propertyPath.Body as MemberExpression;
-            string path = GetPropertyPath(memberToInclude);
+            string path = QueryableIncludeExtenssions.GetPropertyPath(memberToInclude);
             var res = new IncludableQuery<TEntity, TProperty>
             {
                 Path = $"{query.Path}.{path}"
@@ -44,17 +45,6 @@ namespace Mab.Domain.Base.QueryBuilder
             query.Next = res;
             return res;
         }
-        private static string GetPropertyPath(MemberExpression body)
-        {
-            List<string> path = new List<string>();
-            while (body != null)
-            {
-                string propertyName = body.Member.Name;
-                path.Add(propertyName);
-                body = body.Expression as MemberExpression;
-            }
-            path.Reverse();
-            return string.Join(".", path);
-        }
+
     }
 }
