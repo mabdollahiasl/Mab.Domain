@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Nullable>enable</Nullable>
@@ -10,7 +10,7 @@
 		<PackageProjectUrl>https://github.com/mabdollahiasl/Mab.Domain</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageId>Mab.Domain.Base.Api</PackageId>
-		<Version>1.1.1</Version>
+		<Version>1.7.0</Version>
 		<Authors>Morteza Abdollahiasl</Authors>
 	</PropertyGroup>
 
