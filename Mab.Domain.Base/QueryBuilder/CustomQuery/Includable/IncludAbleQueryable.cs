@@ -28,11 +28,11 @@ namespace Mab.Domain.Base.QueryBuilder.CustomQuery.Includable
 
         internal IIncludAbleQueryable<TEntity, TProperty> Apply()
         {
-            if (StartupExtenssions.IncludeApplierType == null)
+            if (DomainConfig.IncludeApplierType == null)
             {
                 throw new NotImplementedException("IncludeApplier not injected!");
             }
-            var applierType = StartupExtenssions.IncludeApplierType;
+            var applierType = DomainConfig.IncludeApplierType;
             IIncludeQueryApplier applier = (IIncludeQueryApplier)Activator.CreateInstance(applierType);
             applier.PropertyPath = Path;
             var resultQuery = applier.Apply(_queryable);

@@ -1,21 +1,20 @@
 ﻿using Mab.Domain.Base.QueryBuilder;
 using Mab.Domain.Base.QueryBuilder.CustomQuery;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Mab.Domain.Base
 {
-    public static class StartupExtenssions
+    public static class DomainConfig
     {
         internal static Type IncludeApplierType { get; private set; }
 
-        public static void AddIncludeQueryBuilder<TQueryApplier>(this IServiceCollection service) where TQueryApplier : IIncludeQueryApplier
+        public static void AddIncludeQueryBuilder<TQueryApplier>() where TQueryApplier : IIncludeQueryApplier
         {
             IncludeApplierType = typeof(TQueryApplier);
         }
-        public static void AddCustomQueryBuilder(this IServiceCollection service,params Type[] markertypes) 
+        public static void AddCustomQueryBuilder(params Type[] markertypes)
         {
             CustomQueryAppliers.InitializeTypes(markertypes);
         }

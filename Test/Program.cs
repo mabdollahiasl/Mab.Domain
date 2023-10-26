@@ -13,7 +13,6 @@ using Mab.Domain.Base;
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
-        services.AddCustomQueryBuilder(typeof(Person));
         services.AddInfrastructureBase();
         services.AddDbContext<TestContext>((opt) => opt.UseInMemoryDatabase("TestData"));
         services.AddScoped(typeof(IReadRepositoryBase<>), typeof(EFRepository<>));
